@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "123India@123",
+    "database": "sysnet_erp",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "123India@123",
+    "database": "sysnet_erp",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "123India@123",
+    "database": "sysnet_erp",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

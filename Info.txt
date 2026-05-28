@@ -1,0 +1,24 @@
+1. Initialize node project
+   npm init -y
+   
+2. Install dependencies
+   npm install express
+   npm install sequelize
+   npm install sequelize-cli
+   npm install mysql2
+   npm install dotenv
+   npm install cors
+   npm install body-parser
+   
+# For PostgreSQL
+  npm install pg pg-hstore
+  
+3. Install development dependency
+	 npm install --save-dev nodemon
+	 
+4. Initialize Sequelize
+	 npx sequelize-cli init
+	 
+
+5. Create .env file
+   touch .env
