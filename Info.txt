@@ -9,6 +9,7 @@
    npm install dotenv
    npm install cors
    npm install body-parser
+   npm install joi  (for validation)
    
 # For PostgreSQL
   npm install pg pg-hstore
@@ -22,3 +23,17 @@
 
 5. Create .env file
    touch .env
+   
+   
+Creating Migrations and model files.
+	npx sequelize-cli model:generate --name EmployementType --attributes name:string,description:string
+	npx sequelize-cli db:migrate
+	npx sequelize-cli db:migrate:undo
+	
+Creating seeder and run seeder.
+	npx sequelize-cli seed:generate --name UserType
+	npx sequelize-cli db:seed:all
+	npx sequelize-cli db:seed --seed name-of-seed-as-in-data
+	
+	npx sequelize-cli db:seed:undo
+	npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data
