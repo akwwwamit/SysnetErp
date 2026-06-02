@@ -10,6 +10,8 @@
    npm install cors
    npm install body-parser
    npm install joi  (for validation)
+   npm install validator (for check XSS)
+   npm install bcrypt (for hashing passwoed)
    
 # For PostgreSQL
   npm install pg pg-hstore
