@@ -3,12 +3,11 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('tbl_saluations_mst', null, {});
-    await queryInterface.bulkInsert('tbl_saluations_mst', [{
+    await queryInterface.bulkDelete('tbl_approval_statuses_mst', null, {});
+    await queryInterface.bulkInsert('tbl_approval_statuses_mst', [{
         'id':1,
-        'company_id': 1,
-        'name': 'Mr.',
-        'description': 'Mr.',
+        'name': 'Pending',
+        'description': 'Pending',
         'status': 1,
         'approval_status_id':2,
         'created_at':new Date(),
@@ -17,9 +16,8 @@ module.exports = {
         'updated_by':1
       },{
         'id':2,
-        'company_id': 1,
-        'name': 'Ms.',
-        'description': 'Ms.',
+        'name': 'Approved',
+        'description': 'Approved',
         'status': 1,
         'approval_status_id':2,
         'created_at':new Date(),
@@ -28,9 +26,18 @@ module.exports = {
         'updated_by':1
       },{
         'id':3,
-        'company_id': 1,
-        'name': 'Mrs.',
-        'description': 'Mrs.',
+        'name': 'Rejected',
+        'description': 'Rejected',
+        'status': 1,
+        'approval_status_id':2,
+        'created_at':new Date(),
+        'created_by':1,
+        'updated_at':new Date(),
+        'updated_by':1
+      },{
+        'id':4,
+        'name': 'Sent Back',
+        'description': 'Sent Back',
         'status': 1,
         'approval_status_id':2,
         'created_at':new Date(),
@@ -41,6 +48,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('tbl_saluations_mst', null, {});
+    await queryInterface.bulkDelete('tbl_approval_statuses_mst', null, {});
   }
 };

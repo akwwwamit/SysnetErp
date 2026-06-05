@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      user_code: {
+        type: Sequelize.STRING,
+        allowNull:false
+      },
       company_id: {
         type: Sequelize.BIGINT,
         allowNull:false,
@@ -152,6 +156,16 @@ module.exports = {
       biomatric_id: {
         type: Sequelize.STRING,
         allowNull:true
+      },
+      approval_status_id: {
+        type: Sequelize.BIGINT,
+        allowNull:false,
+        references: {
+          model: 'tbl_approval_statuses_mst',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       status: {
         type: Sequelize.CHAR(1),

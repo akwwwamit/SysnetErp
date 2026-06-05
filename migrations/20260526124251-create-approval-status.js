@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tbl_company_mst', {
+    await queryInterface.createTable('tbl_approval_statuses_mst', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,17 +12,8 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      logo: {
-        type: Sequelize.STRING,
-        defaultValue:'default.png'
-      },
-      location: {
-        type: Sequelize.TEXT,
-        allowNull:true
-      },
       description: {
-        type: Sequelize.STRING,
-        allowNull:true
+        type: Sequelize.STRING
       },
       approval_status_id: {
         type: Sequelize.BIGINT,
@@ -64,6 +55,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tbl_company_mst');
+    await queryInterface.dropTable('tbl_approval_statuses_mst');
   }
 };

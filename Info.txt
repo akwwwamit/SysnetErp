@@ -28,7 +28,7 @@
    
    
 Creating Migrations and model files.
-	npx sequelize-cli model:generate --name EmployementType --attributes name:string,description:string
+	npx sequelize-cli model:generate --name ApprovalStatus --attributes name:string,description:string
 	npx sequelize-cli db:migrate
 	npx sequelize-cli db:migrate:undo
 	

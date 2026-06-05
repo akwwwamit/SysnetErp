@@ -11,6 +11,7 @@ module.exports = {
         'location': 'Lusaka',
         'description': 'Lusaka road',
         'status': 1,
+        'approval_status_id':2,
         'created_at':new Date(),
         'created_by':1,
         'updated_at':new Date(),

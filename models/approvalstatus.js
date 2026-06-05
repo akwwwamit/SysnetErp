@@ -3,52 +3,85 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class UsersEducation extends Model {
+  class ApprovalStatus extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      UsersEducation.belongsTo(models.User, {
-        foreignKey: 'user_id'
+      ApprovalStatus.hasOne(models.User, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.BloodGroup, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.Company, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.Department, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.Designation, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.EmployeeCategory, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.EmployementType, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.Grade, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.MarritalStatus, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.Saluation, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.UserType, {
+        foreignKey: 'approval_status_id',
       });
     }
   }
-  UsersEducation.init({
+  ApprovalStatus.init({
     id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true
     },
-    user_id: {
+    company_id: {
       type: DataTypes.BIGINT,
       allowNull:false
     },
-    course: {
+    name: {
       type:DataTypes.STRING,
-      allowNull:true
+      allowNull:false
     },
-    college: {
-      type:DataTypes.STRING,
-      allowNull:true
-    },
-    result: {
-      type:DataTypes.STRING,
-      allowNull:true
-    },
-    passing_year: {
-      type:DataTypes.STRING,
-      allowNull:true
-    },
-    remarks: {
-      type:DataTypes.STRING,
+    description: {
+      type:DataTypes.TEXT,
       allowNull:true
     },
     status: {
       type:DataTypes.CHAR(1),
       defaultValue:1,
       allowNull:false
+    },
+    approval_status_id: {
+      type: DataTypes.BIGINT,
+      allowNull:false,
+      defaultValue: 1
     },
     created_at: {
       type:DataTypes.STRING,
@@ -99,10 +132,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'UsersEducation',
-    tableName:'tbl_users_educations_trn',
-    underscored:true,
-    timestamps: true,
+    modelName: 'ApprovalStatus',
+    tableName: 'tbl_approval_statuses_mst',
+    underscored: true,
+    timestamps: true
   });
-  return UsersEducation;
+  return ApprovalStatus;
 };

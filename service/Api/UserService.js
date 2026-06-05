@@ -4,7 +4,7 @@ const Joi = require('joi');
 
 //fetching users list.
 let usersList=(req, res)=>{
-
+    return userRepository.usersList(req, res);
 }
 
 
@@ -63,12 +63,83 @@ let addUser=(req, res)=>{
         
         return Response.error(res, "Validation Error", formattedErrors, 400);
     }else {
-       return userRepository.usersList(req, res);
+       return userRepository.addUser(req, res);
     }
     
 }
 
+//going to disable user.
+let disableUser=(req, res)=>{
+    return userRepository.disableUser(req, res);
+}
+
+//going to enable user.
+let enableUser=(req, res)=>{
+    return userRepository.enableUser(req, res);
+}
+
+//going to delete user.
+let deleteUser=(req, res)=>{
+    return userRepository.deleteUser(req, res);
+}
+
+//going to restore user.
+let restoreUser=(req, res)=>{
+    return userRepository.restoreUser(req, res);
+}
+
+//fetch user info.
+let getUserInfo=(req, res)=>{
+    return userRepository.getUserInfo(req, res);
+}
+
+//going to update user info
+let updateUserInfo=(req, res)=>{
+      const userSchema = Joi.object({
+        saluation: Joi.number().integer().required().messages({
+            "number.base": "Saluation must be a number",
+            "number.integer": "Saluation must be an integer",
+            "any.required": "Please select Saluation"
+        }),
+        firstName: Joi.string().min(2).required().messages({
+            "string.empty": "Please enter your first name",
+            "string.min": "First name should be minimum 2 character",
+        }),
+        lastName: Joi.string().min(2).required().messages({
+            "string.empty": "Please enter your last name",
+            "string.min": "Last name should be minimum 2 character",
+        }),
+        mobile: Joi.string().min(5).required().messages({
+            "string.empty": "Please enter mobile number",
+            "string.min": "Mobile number should be minimum 5 character",
+        })
+    });
+
+    const { error, value } = userSchema.validate(req.body, {
+        abortEarly: false,   // show all errors
+        stripUnknown: true   // remove extra fields
+    });
+
+    if (error) {
+        const formattedErrors = error.details.reduce((acc, err) => {
+            const field = err.path.join('.');
+            acc[field] = err.message;
+            return acc;
+        }, {});
+        
+        return Response.error(res, "Validation Error", formattedErrors, 400);
+    }else {
+       return userRepository.updateUserInfo(req, res);
+    }
+}
+
 module.exports={
     usersList,
-    addUser
+    addUser,
+    disableUser,
+    enableUser,
+    deleteUser,
+    restoreUser,
+    getUserInfo,
+    updateUserInfo
 }

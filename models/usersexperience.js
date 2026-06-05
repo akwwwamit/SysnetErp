@@ -82,7 +82,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     updated_at: {
       type:DataTypes.DATE,
-      allowNull:true
+      allowNull:true,
+      get() {
+        return this.getDataValue("updated_at")
+        ? new Date(this.getDataValue("updated_at")).toLocaleString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+          })
+        : null;
+      }
     },
     updated_by: {
       type:DataTypes.BIGINT,

@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     user_id: {
       type: DataTypes.BIGINT,
-      allowNull:false
+      allowNull:true
     },
     dl_no: {
       type:DataTypes.STRING,
-      allowNull:false
+      allowNull:true
     },
     dl_expiery_date: {
       type:DataTypes.DATEONLY,
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     passport_no: {
       type:DataTypes.STRING,
-      allowNull:false
+      allowNull:true
     },
     passport_expiery_date: {
       type:DataTypes.DATEONLY,
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     work_permit_no: {
       type:DataTypes.STRING,
-      allowNull:false
+      allowNull:true
     },
     work_permit_expiery_date: {
       type:DataTypes.DATEONLY,
@@ -78,7 +78,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     updated_at: {
       type:DataTypes.DATE,
-      allowNull:true
+      allowNull:true,
+      get() {
+        return this.getDataValue("updated_at")
+        ? new Date(this.getDataValue("updated_at")).toLocaleString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+          })
+        : null;
+      }
     },
     updated_by: {
       type:DataTypes.BIGINT,
