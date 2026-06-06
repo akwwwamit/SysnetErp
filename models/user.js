@@ -34,10 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_id',
       });
 
-      User.hasOne(models.UserType, {
-        foreignKey: 'user_type_id',
-      });
-
       User.belongsTo(models.Designation, {
           foreignKey: 'designation_id'
       });

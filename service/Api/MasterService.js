@@ -53,6 +53,21 @@ let gradeLists=(req, res)=>{
     return masterRepository.gradeLists(req, res);
 }
 
+//fetching country lists.
+let countryLists=(req, res)=>{
+    return masterRepository.countryLists(req, res);
+}
+
+//fetching states lists.
+let stateLists=(req, res)=>{
+    return masterRepository.stateLists(req, res);
+}
+
+//fetching cities lists.
+let citiesList=(req, res)=>{
+    return masterRepository.citiesList(req, res);
+}
+
 module.exports={
     companyLists,
     userTypes,
@@ -63,5 +78,8 @@ module.exports={
     usersList,
     employeeCategory,
     employmentType,
-    gradeLists
+    gradeLists,
+    countryLists,
+    stateLists,
+    citiesList
 }

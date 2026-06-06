@@ -17,6 +17,9 @@ router.get('/reporing-to/:companyId', MasterController.usersList);
 router.get('/emp-category/:companyId', MasterController.employeeCategory);
 router.get('/employment-type/:companyId', MasterController.employmentType);
 router.get('/grade-list/:companyId', MasterController.gradeLists);
+router.get('/country-list', MasterController.countryLists);
+router.get('/states-list/:countryId', MasterController.stateLists);
+router.get('/cities-list/:stateId', MasterController.citiesList);
 
 router.post('/users-list', UserController.usersList);
 router.post('/add-user', UserController.addUser);

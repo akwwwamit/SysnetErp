@@ -53,6 +53,21 @@ let gradeLists=(req, res)=>{
     return masterService.gradeLists(req, res);
 }
 
+//fetching counries lists
+let countryLists=(req, res)=>{
+    return masterService.countryLists(req, res);
+}
+
+//fetching states lists
+let stateLists=(req, res)=>{
+    return masterService.stateLists(req, res);
+}
+
+//fetching cities lists
+let citiesList=(req, res)=>{
+    return masterService.citiesList(req, res);
+}
+
 module.exports={
     companyLists,
     userTypes,
@@ -63,5 +78,8 @@ module.exports={
     usersList,
     employeeCategory,
     employmentType,
-    gradeLists
+    gradeLists,
+    countryLists,
+    stateLists,
+    citiesList
 }

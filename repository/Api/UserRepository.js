@@ -2,9 +2,7 @@ let DB=require("../../models/index");
 let codeGenerator=require("../../library/CodeGenerator");
 let response=require("../../library/Response");
 let message=require("../../library/Message");
-
 let {Op} =require("sequelize");
-
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 
@@ -62,10 +60,10 @@ let usersList = async (req, res) => {
       totalpage: Math.ceil(usersList.count / limit),
       records: usersList.rows,
     };
-     let message=usersList?.count ? 'Record found' : 'No record found to display';
-     return response.success(res, message, data);
+     let messages=usersList?.count ? message.recordFound : message.noRecord;
+     return response.success(res, messages, data);
   } catch (error) {
-     return response.error(res, error.message);
+     return response.error(res, message.serverError);
   }
 };
 
@@ -263,14 +261,13 @@ let addUser=async(req, res)=>{
       }});
 
       if (disable) {
-         return response.success(res, "User has been successfully disabled");
+         return response.success(res, message.disabled);
       }else {
-         return response.error(res, "Something went wrong");
+         return response.error(res, message.serverError);
       }
    }catch(error) {
       return response.error(res, error.message);
    }
-   res.send(req.params);
 }
 
  //going to enable user.
@@ -284,14 +281,13 @@ let addUser=async(req, res)=>{
       }});
       
       if (disable) {
-         return response.success(res, "User has been successfully enabled");
+         return response.success(res, message.enabled);
       }else {
-         return response.error(res, "Something went wrong");
+         return response.error(res, message.serverError);
       }
    }catch(error) {
       return response.error(res, error.message);
    }
-   res.send(req.params);
 }
 
 //going to enable user.
@@ -303,14 +299,13 @@ let addUser=async(req, res)=>{
       }});
       
       if (deleteUser) {
-         return response.success(res, "User has been successfully deleted");
+         return response.success(res, message.deleted);
       }else {
-         return response.error(res, "Something went wrong");
+         return response.error(res, message.serverError);
       }
    }catch(error) {
       return response.error(res, error.message);
    }
-   res.send(req.params);
 }
 
 //going to restore user.
@@ -322,14 +317,13 @@ let addUser=async(req, res)=>{
       }});
       
       if (restoreUser) {
-         return response.success(res, "User has been successfully restored");
+         return response.success(res, message.restored);
       }else {
-         return response.error(res, "Something went wrong");
+         return response.error(res, message.serverError);
       }
    }catch(error) {
       return response.error(res, error.message);
    }
-   res.send(req.params);
 }
 
  //fetching user legal information.
@@ -392,7 +386,6 @@ let addUser=async(req, res)=>{
 //going to restore user.
  let getUserInfo=async(req, res)=>{
    try {
-
       let userInfo=await DB.User.findOne({where:{id:1},
          attributes:['id', 'user_code', 'company_id', 'user_type_id', 'saluation_id', 'blood_group_id',
             'designation_id', 'department_id', 'emp_category_id', 'employement_type_id', 'grade_id',
@@ -436,17 +429,13 @@ let addUser=async(req, res)=>{
       }
 
       if (info?.id) {
-         return response.success(res, "User has been successfully restored", info);
+         return response.success(res, message.recordFound, info);
       }else {
          return response.error(res);
       }
-      
-      
-      
    }catch(error) {
       return response.error(res, error.message);
    }
-   res.send(req.params);
 }
 
 //going to update user information.
@@ -533,7 +522,7 @@ let updateUserInfo=async(req, res)=>{
             }
           }
 
-      //     //adding user addresses
+          //adding user addresses
           if (user && (req.body?.address?.length)) {
 
               for (let data of req.body.address) {
@@ -683,7 +672,7 @@ let updateUserInfo=async(req, res)=>{
            if (user && req.body?.curricularActivity?.length>0) {
 
                for (let data of req.body.curricularActivity) {
-                  let activity=await DB.UsersExperience.findOne({where:[{id:data.experienceId},{user_id:req.body.userId}]});
+                  let activity=await DB.UsersExperience.findOne({where:[{id:data.activityId},{user_id:req.body.userId}]});
                   if (activity) {
                      DB.UsersCurricular.update({
                         "user_id":user?.id,
@@ -711,9 +700,9 @@ let updateUserInfo=async(req, res)=>{
                }
            }
 
-         return response.success(res, "User has been successfully updated");
+         return response.success(res, message.updated);
     }catch(error) {
-        return response.error(res, error.message);
+        return response.error(res, message.serverError);
     }
 }
 
