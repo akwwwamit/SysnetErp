@@ -1,4 +1,5 @@
 module.exports={
+    "created": "Record created",
     "recordFound": "Records found",
     "noRecord": "No record found to display",
     "serverError": "Something is bad happend please try again later",

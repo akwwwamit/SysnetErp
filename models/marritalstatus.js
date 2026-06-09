@@ -97,6 +97,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName:'tbl_marrital_status_mst',
     underscored:true,
     timestamps: true,
+    paranoid: true
   });
   return MarritalStatus;
 };

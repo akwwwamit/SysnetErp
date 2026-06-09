@@ -111,6 +111,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName:'tbl_users_experiences_trn',
     underscored:true,
     timestamps: true,
+    paranoid: true
   });
   return UsersExperience;
 };

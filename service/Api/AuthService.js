@@ -5,8 +5,9 @@ const Joi = require('joi');
 let authUser = (req, res) => {
 
     const userSchema = Joi.object({
-        username: Joi.string().required().messages({
-            "string.empty": "Please enter username"
+        username: Joi.string().min(4).required().messages({
+            "string.empty": "Please enter username",
+            "string.min": "Username should be minimum 4 character",
         }),
         password: Joi.string().min(6).required().messages({
             "string.empty": "Please enter your password",

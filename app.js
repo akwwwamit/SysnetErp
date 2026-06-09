@@ -3,7 +3,10 @@ const app = express();
 const apiRoutes = require('./route/api');
 const webRoutes = require('./route/web');
 
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 
 app.use('/', webRoutes);

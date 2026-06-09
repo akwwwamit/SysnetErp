@@ -42,9 +42,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'company_id',
       });
 
-      Company.hasMany(models.ApprovalStatus, {
-        foreignKey: 'company_id',
-      });
+       Company.belongsTo(models.ApprovalStatus, {
+        foreignKey: 'approval_status_id',
+       });
+      
     }
   }
   Company.init({
@@ -133,6 +134,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName:'tbl_company_mst',
     underscored:true,
     timestamps: true,
+    paranoid: true
   });
   return Company;
 };

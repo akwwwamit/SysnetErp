@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+
+      ApprovalStatus.hasMany(models.Company, {
+    foreignKey: 'approval_status_id',
+  });
+  
       ApprovalStatus.hasOne(models.User, {
         foreignKey: 'approval_status_id',
       });
@@ -18,9 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'approval_status_id',
       });
 
-      ApprovalStatus.hasOne(models.Company, {
-        foreignKey: 'approval_status_id',
-      });
+      
 
       ApprovalStatus.hasOne(models.Department, {
         foreignKey: 'approval_status_id',
@@ -60,10 +63,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true
-    },
-    company_id: {
-      type: DataTypes.BIGINT,
-      allowNull:false
     },
     name: {
       type:DataTypes.STRING,
@@ -135,7 +134,8 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'ApprovalStatus',
     tableName: 'tbl_approval_statuses_mst',
     underscored: true,
-    timestamps: true
+    timestamps: true,
+    paranoid: true
   });
   return ApprovalStatus;
 };

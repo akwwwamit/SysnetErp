@@ -12,6 +12,8 @@
    npm install joi  (for validation)
    npm install validator (for check XSS)
    npm install bcrypt (for hashing passwoed)
+   npm install multer
+   npm install jsonwebtoken
    
 # For PostgreSQL
   npm install pg pg-hstore

@@ -100,6 +100,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName:'tbl_users_families_trn',
     underscored:true,
     timestamps: true,
+    paranoid: true
   });
   return UsersFamily;
 };

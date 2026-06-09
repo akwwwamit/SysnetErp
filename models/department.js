@@ -105,6 +105,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName:'tbl_departments_mst',
     underscored:true,
     timestamps: true,
+    paranoid: true
   });
   return Department;
 };
