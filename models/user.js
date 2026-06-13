@@ -53,6 +53,10 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.ApprovalStatus, {
         foreignKey: 'approval_status_id' 
       });
+
+      User.hasMany(models.UsersRole, {
+        foreignKey: 'user_id' 
+      });
     }
   }
   User.init({

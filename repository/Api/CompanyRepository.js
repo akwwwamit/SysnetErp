@@ -66,7 +66,6 @@ let companyLists = async (req, res) => {
     let messages = dataList?.count ? message.recordFound : message.noRecord;
     return response.success(res, messages, data);
   } catch (error) {
-    console.log(error);
     return response.error(res, message.serverError);
   }
 };
@@ -91,7 +90,6 @@ const addCompany = async (req, res) => {
         }
 
     } catch (err) {
-      console.log(err);
         return response.error(res, message.serverError);
     }
 }
@@ -110,7 +108,6 @@ let diableCompany=async(req, res)=>{
           return response.error(res, message.serverError);
         }
     } catch (err) {
-      console.log(err);
         return response.error(res, message.serverError);
     }
 }
@@ -129,7 +126,6 @@ let enableCompany=async(req, res)=>{
           return response.error(res, message.serverError);
         }
     } catch (err) {
-      console.log(err);
         return response.error(res, message.serverError);
     }
 }
@@ -147,7 +143,6 @@ let getCompanyInfo=async(req, res)=>{
           return response.error(res, message.serverError);
         }
     } catch (err) {
-      console.log(err);
         return response.error(res, message.serverError);
     }
 }
@@ -178,7 +173,6 @@ let updateCompany=async(req, res)=>{
           return response.error(res, message.serverError);
         }
     } catch (err) {
-      console.log(err);
         return response.error(res, message.serverError);
     }
 }
@@ -196,7 +190,6 @@ let deleteCompany=async(req, res)=>{
           return response.error(res, message.serverError);
         }
     } catch (err) {
-      console.log(err);
         return response.error(res, message.serverError);
     }
 }
@@ -214,7 +207,6 @@ let restoreCompany=async(req, res)=>{
           return response.error(res, message.serverError);
         }
     } catch (err) {
-      console.log(err);
         return response.error(res, message.serverError);
     }
 }

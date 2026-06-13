@@ -3,57 +3,24 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Company extends Model {
+  class Permissions extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Company.hasMany(models.Saluation, {
-        foreignKey: 'company_id',
+      Permissions.belongsTo(models.ApprovalStatus, {
+        foreignKey: 'approval_status_id' 
       });
 
-      Company.hasMany(models.BloodGroup, {
-        foreignKey: 'company_id',
+      Permissions.hasMany(models.UsersRolePermission, {
+        foreignKey: 'permission_id' 
       });
-
-      Company.hasMany(models.Designation, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.Department, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.EmployeeCategory, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.EmployementType, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.Grade, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.User, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.ModuleGroup, {
-        foreignKey: 'company_id',
-      });
-
-       Company.belongsTo(models.ApprovalStatus, {
-        foreignKey: 'approval_status_id',
-       });
-      
     }
   }
-  Company.init({
-     id: {
+  Permissions.init({
+    id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true
@@ -62,18 +29,13 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false
     },
-    logo: {
-      type:DataTypes.STRING,
-      allowNull:false,
-      defaultValue:'default.png'
-    },
-    location: {
-      type:DataTypes.TEXT,
-      allowNull:true
-    },
     description: {
       type:DataTypes.TEXT,
       allowNull:true
+    },
+    sort_order: {
+      type:DataTypes.INTEGER,
+      defaultValue:0
     },
     status: {
       type:DataTypes.CHAR(1),
@@ -134,11 +96,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Company',
-    tableName:'tbl_company_mst',
+    modelName: 'Permissions',
+    tableName:'tbl_permissions_mst',
     underscored:true,
     timestamps: true,
     paranoid: true
   });
-  return Company;
+  return Permissions;
 };

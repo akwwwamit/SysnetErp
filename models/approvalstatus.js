@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
 
       ApprovalStatus.hasMany(models.Company, {
-    foreignKey: 'approval_status_id',
-  });
+        foreignKey: 'approval_status_id',
+      });
   
       ApprovalStatus.hasOne(models.User, {
         foreignKey: 'approval_status_id',
@@ -54,6 +54,14 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       ApprovalStatus.hasOne(models.UserType, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasOne(models.Permissions, {
+        foreignKey: 'approval_status_id',
+      });
+
+      ApprovalStatus.hasMany(models.ModuleGroup, {
         foreignKey: 'approval_status_id',
       });
     }

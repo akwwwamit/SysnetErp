@@ -3,77 +3,43 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Company extends Model {
+  class UsersRolePermission extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Company.hasMany(models.Saluation, {
-        foreignKey: 'company_id',
+      UsersRolePermission.belongsTo(models.UsersRole, {
+        foreignKey: 'role_id' 
       });
 
-      Company.hasMany(models.BloodGroup, {
-        foreignKey: 'company_id',
+      UsersRolePermission.belongsTo(models.Module, {
+        foreignKey: 'module_id' 
       });
 
-      Company.hasMany(models.Designation, {
-        foreignKey: 'company_id',
+      UsersRolePermission.belongsTo(models.Permissions, {
+        foreignKey: 'permission_id' 
       });
-
-      Company.hasMany(models.Department, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.EmployeeCategory, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.EmployementType, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.Grade, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.User, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.ModuleGroup, {
-        foreignKey: 'company_id',
-      });
-
-       Company.belongsTo(models.ApprovalStatus, {
-        foreignKey: 'approval_status_id',
-       });
-      
     }
   }
-  Company.init({
-     id: {
+  UsersRolePermission.init({
+    id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
-      type:DataTypes.STRING,
+    module_id: {
+      type:DataTypes.BIGINT,
       allowNull:false
     },
-    logo: {
-      type:DataTypes.STRING,
-      allowNull:false,
-      defaultValue:'default.png'
+    role_id: {
+      type:DataTypes.BIGINT,
+      allowNull:false
     },
-    location: {
-      type:DataTypes.TEXT,
-      allowNull:true
-    },
-    description: {
-      type:DataTypes.TEXT,
-      allowNull:true
+    permission_id: {
+      type:DataTypes.BIGINT,
+      allowNull:false
     },
     status: {
       type:DataTypes.CHAR(1),
@@ -134,11 +100,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Company',
-    tableName:'tbl_company_mst',
+    modelName: 'UsersRolePermission',
+    tableName:'tbl_user_role_permissions_trn',
     underscored:true,
     timestamps: true,
     paranoid: true
   });
-  return Company;
+  return UsersRolePermission;
 };

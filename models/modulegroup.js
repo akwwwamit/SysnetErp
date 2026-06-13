@@ -3,77 +3,48 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Company extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class ModuleGroup extends Model {
+
     static associate(models) {
-      Company.hasMany(models.Saluation, {
-        foreignKey: 'company_id',
+      ModuleGroup.belongsTo(models.Module, {
+        foreignKey: 'group_id' 
       });
 
-      Company.hasMany(models.BloodGroup, {
-        foreignKey: 'company_id',
+       ModuleGroup.belongsTo(models.Company, {
+        foreignKey: 'company_id' 
       });
 
-      Company.hasMany(models.Designation, {
-        foreignKey: 'company_id',
+       ModuleGroup.belongsTo(models.Company, {
+        foreignKey: 'approval_status_id' 
       });
-
-      Company.hasMany(models.Department, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.EmployeeCategory, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.EmployementType, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.Grade, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.User, {
-        foreignKey: 'company_id',
-      });
-
-      Company.hasMany(models.ModuleGroup, {
-        foreignKey: 'company_id',
-      });
-
-       Company.belongsTo(models.ApprovalStatus, {
-        foreignKey: 'approval_status_id',
-       });
-      
     }
   }
-  Company.init({
-     id: {
+  ModuleGroup.init({
+    id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true
+    },
+    sub_group_id: {
+      type: DataTypes.BIGINT,
+      defaultValue:0,
+      allowNull:false
+    },
+    company_id: {
+      type: DataTypes.BIGINT,
+      allowNull:false
     },
     name: {
       type:DataTypes.STRING,
       allowNull:false
     },
-    logo: {
-      type:DataTypes.STRING,
-      allowNull:false,
-      defaultValue:'default.png'
-    },
-    location: {
-      type:DataTypes.TEXT,
-      allowNull:true
-    },
     description: {
-      type:DataTypes.TEXT,
+      type:DataTypes.STRING,
       allowNull:true
+    },
+    sort_order: {
+      type:DataTypes.INTEGER,
+      defaultValue:0
     },
     status: {
       type:DataTypes.CHAR(1),
@@ -134,11 +105,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Company',
-    tableName:'tbl_company_mst',
+    modelName: 'ModuleGroup',
+    tableName:'tbl_module_groups_mst',
     underscored:true,
     timestamps: true,
     paranoid: true
   });
-  return Company;
+  return ModuleGroup;
 };

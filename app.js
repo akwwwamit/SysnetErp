@@ -2,11 +2,11 @@ const express = require('express');
 const app = express();
 const apiRoutes = require('./route/api');
 const webRoutes = require('./route/web');
-
+const rateLimiter=require("./middleware/rateLimiter");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(rateLimiter);
 
 
 app.use('/', webRoutes);

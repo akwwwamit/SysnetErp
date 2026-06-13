@@ -33,6 +33,37 @@ let authUser = (req, res) => {
     }
 }
 
+
+
+let refreshToken = (req, res) => {
+
+    const userSchema = Joi.object({
+      refreshToken: Joi.string().min(1).required().messages({
+        "string.base": "User id must be a number",
+        "string.min": "User id must be greater than or equal to 1",
+        "any.required": "Please enter user id",
+      }),
+    });
+
+    const { error, value } = userSchema.validate(req.body, {
+        abortEarly: false,   // show all errors
+        stripUnknown: true   // remove extra fields
+    });
+
+    if (error) {
+        const formattedErrors = error.details.reduce((acc, err) => {
+            const field = err.path.join('.');
+            acc[field] = err.message;
+            return acc;
+        }, {});
+        
+        return Response.error(res, "Validation Error", formattedErrors, 400);
+    }else {
+        return authRepository.refreshToken(req, res);
+    }
+}
+
 module.exports = {
-    authUser
+    authUser,
+    refreshToken
 }
